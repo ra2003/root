@@ -604,7 +604,7 @@ namespace cling {
       CI->clearOutputFiles(/*EraseFiles=*/shouldEraseOutputFiles);
 
       LangOptions& LO = CI->getLangOpts();
-      if (!LO.getCompilingModule() != clang::LangOptions::CMK_None) {
+      if (LO.getCompilingModule() != clang::LangOptions::CMK_None) {
         if (DisableFree) {
           CI->resetAndLeakPreprocessor();
           CI->resetAndLeakSourceManager();

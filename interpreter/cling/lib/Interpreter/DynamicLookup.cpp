@@ -787,7 +787,7 @@ namespace cling {
                                        m_NoRange,
                                        ExprInfoTy,
                                        TrivialTSI,
-                                       /*ArraySize=*/0,
+                                       /*ArraySize=*/{},
                                        //BuildCXXNew depends on the SLoc to be
                                        //valid!
                                        // TODO: Propose a patch in clang

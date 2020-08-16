@@ -296,10 +296,6 @@ std::string GetExecutablePath() {
 }
 
 namespace cling {
-  DynamicLibraryManager::~DynamicLibraryManager() {
-    delete m_Dyld;
-  }
-
   class Dyld {
     struct BasePathHashFunction {
       size_t operator()(const BasePath& item) const {
@@ -865,6 +861,10 @@ namespace cling {
     */
 
     return ""; // Search found no match.
+  }
+
+  DynamicLibraryManager::~DynamicLibraryManager() {
+    delete m_Dyld;
   }
 
   void DynamicLibraryManager::initializeDyld(

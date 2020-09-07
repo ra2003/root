@@ -453,8 +453,8 @@ IncrementalJIT::addModule(std::unique_ptr<llvm::Module> module) {
   // default.
   module->setDataLayout(m_TMDataLayout);
   llvm::orc::VModuleKey K = m_ES.allocateVModule();
-  llvm::cantFail(m_LazyEmitLayer.addModule(K, std::move(module)));
   m_UnloadPoints[module.get()] = K;
+  llvm::cantFail(m_LazyEmitLayer.addModule(K, std::move(module)));
   return K;
 }
 

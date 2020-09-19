@@ -1166,10 +1166,10 @@ static GlobalModuleIndex *loadGlobalModuleIndex(SourceLocation TriggerLoc, cling
          };
          DefinitionFinder defFinder(IDs, CI.getASTContext().getTranslationUnitDecl());
 
-         GlobalModuleIndex::writeIndex(CI.getFileManager(),
-                                       CI.getPCHContainerReader(),
-                                       ModuleIndexPath,
-                                       &IDs);
+         llvm::cantFail(GlobalModuleIndex::writeIndex(CI.getFileManager(),
+                                                      CI.getPCHContainerReader(),
+                                                      ModuleIndexPath,
+                                                      &IDs));
          ModuleManager->resetForReload();
          ModuleManager->loadGlobalIndex();
          GlobalIndex = ModuleManager->getGlobalIndex();

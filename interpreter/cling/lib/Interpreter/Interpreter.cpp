@@ -1327,7 +1327,7 @@ namespace cling {
   Interpreter::EvaluateInternal(const std::string& input,
                                 CompilationOptions CO,
                                 Value* V, /* = 0 */
-                                Transaction** T /* = 0 */,
+                                Transaction** /* T = 0 */,
                                 size_t wrapPoint /* = 0*/) {
     StateDebuggerRAII stateDebugger(this);
 

@@ -1076,7 +1076,7 @@ static bool HasASTFileOnDisk(clang::Module *M, const clang::Preprocessor &PP, st
 }
 
 static bool HaveFullGlobalModuleIndex = false;
-static GlobalModuleIndex *loadGlobalModuleIndex(SourceLocation TriggerLoc, cling::Interpreter &interp)
+static GlobalModuleIndex *loadGlobalModuleIndex(cling::Interpreter &interp)
 {
    CompilerInstance &CI = *interp.getCI();
    Preprocessor &PP = CI.getPreprocessor();
@@ -1253,7 +1253,7 @@ static void RegisterCxxModules(cling::Interpreter &clingInterp)
       }
 
       if (supportedPlatform) {
-         loadGlobalModuleIndex(SourceLocation(), clingInterp);
+         loadGlobalModuleIndex(clingInterp);
          // FIXME: The ASTReader still calls loadGlobalIndex and loads the file
          // We should investigate how to suppress it completely.
          GlobalIndex = CI.getModuleManager()->getGlobalIndex();

@@ -20,7 +20,6 @@
 namespace cling {
   class Dyld;
   class InterpreterCallbacks;
-  class InvocationOptions;
 
   ///\brief A helper class managing dynamic shared objects.
   ///
@@ -59,10 +58,6 @@ namespace cling {
     DyLibs m_DyLibs;
     llvm::StringSet<> m_LoadedLibraries;
 
-    ///\brief Contains the list of the current include paths.
-    ///
-    const InvocationOptions& m_Opts;
-
     ///\brief System's include path, get initialized at construction time.
     ///
     SearchPathInfos m_SearchPaths;
@@ -95,7 +90,7 @@ namespace cling {
     ///
     static std::string getSymbolLocation(void* func);
   public:
-    DynamicLibraryManager(const InvocationOptions& Opts);
+    DynamicLibraryManager();
     ~DynamicLibraryManager();
     InterpreterCallbacks* getCallbacks() { return m_Callbacks; }
     const InterpreterCallbacks* getCallbacks() const { return m_Callbacks; }
@@ -109,8 +104,8 @@ namespace cling {
        return m_SearchPaths;
     }
 
-    void addSearchPath(llvm::StringRef dir) {
-      m_SearchPaths.emplace_back(SearchPathInfo{dir, /*IsUser*/ true});
+    void addSearchPath(llvm::StringRef dir, bool isUser = true) {
+      m_SearchPaths.insert(m_SearchPaths.begin(), SearchPathInfo{dir, isUser});
     }
 
     ///\brief Looks up a library taking into account the current include paths

@@ -200,10 +200,6 @@ namespace cling {
     ///
     std::unique_ptr<InterpreterCallbacks> m_Callbacks;
 
-    ///\brief Dynamic library manager object.
-    ///
-    std::unique_ptr<DynamicLibraryManager> m_DyLibManager;
-
     ///\brief Information about the last stored states through .storeState
     ///
     mutable std::vector<ClangInternalState*> m_StoredStates;
@@ -721,12 +717,8 @@ namespace cling {
     const InterpreterCallbacks* getCallbacks() const {return m_Callbacks.get();}
     InterpreterCallbacks* getCallbacks() { return m_Callbacks.get(); }
 
-    const DynamicLibraryManager* getDynamicLibraryManager() const {
-      return m_DyLibManager.get();
-    }
-    DynamicLibraryManager* getDynamicLibraryManager() {
-      return m_DyLibManager.get();
-    }
+    const DynamicLibraryManager* getDynamicLibraryManager() const;
+    DynamicLibraryManager* getDynamicLibraryManager();
 
     const Transaction* getFirstTransaction() const;
     const Transaction* getLastTransaction() const;
